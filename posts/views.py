@@ -18,8 +18,15 @@ def index(request):
         article_list.append("slug: {} <br><hr>".format(article.slug))
     return HttpResponse(article_list)
 
-def index_use_template(requests):
+def index_use_template(request):
     article_records = Post.objects.all()
     now = datetime.now()
-    return render(requests, "index.html", locals())
+    #return render(requests, "index.html", locals())
+    return render(request, "pages/home.html", locals())
 
+def showPost(request, slug):
+    article = Post.objects.get(slug=slug)
+    return render(request, 'pages/post.html', locals())
+
+def login(request):
+    return render(request, 'pages/login.html')
